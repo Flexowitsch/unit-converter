@@ -27,18 +27,13 @@ const outputLength = document.getElementById("outputLength")
 const outputVolume = document.getElementById("outputVolume")
 const outputMass = document.getElementById("outputMass")
 
-//setting a variable for the switch of the themes
-let darkTheme = true
 
 //update the user input variable with the current input
 unitAmountInput.addEventListener("input", function() {
     userInput = this.value;   
 })
 
-// update the dark theme Variable
-changeThemeBtn.addEventListener("click", function(){
-    darkTheme = darkTheme ? false : true
-})
+
 
 function render() {
     outputLength.textContent = `${userInput} meters = ${outputMeterToFeet} feet | ${userInput} feet = ${outputFeetToMeter} meters`
@@ -46,16 +41,7 @@ function render() {
     outputMass.textContent = `${userInput} kilos = ${outputKiloToPound} pounds | ${userInput} pounds = ${outputPoundToKilo} kilos`
 }
 
-function setTheme() {
-    let root = document.documentElement;
-    if (darkTheme === false) {
-        root.style.setProperty('--output-background', '#1F2937');
-        
-    } else {
-        root.style.setProperty('--output-background', '#F4F4F4');
-        
-    }
-}
+
 
 
 // logging the calculated values to the console
@@ -63,8 +49,31 @@ submitButton.addEventListener("click",function(){
    outputContainer.style.display = "block";
    userInputContainer.style.borderRadius = "0.75rem 0.75rem 0 0"
    render()
+
+    // Use a setTimeout to trigger the fade-in effect
+  setTimeout(function() {
+    outputContainer.style.opacity = 1; // Set opacity to 1 for a fade-in effect
+  }, 100); // Adjust the delay as needed
 })
 
-//switching the theme 
-console.log(darkTheme)
-setTheme()
+//switching the theme from dark to light
+let darkMode = false; // Set the initial value to false
+
+changeThemeBtn.addEventListener('click', () => {
+    const root = document.documentElement;
+    if (darkMode) { 
+        root.style.setProperty('--output-background', '#f4f4f4');
+        root.style.setProperty('--conversion-container-bg', '#fff');
+        root.style.setProperty('--conversion-headline', 'rgba(90, 83, 123, 1');
+        root.style.setProperty('--output-calculation', '#353535');
+    } else {
+        // Set the variables back to their original values
+        root.style.setProperty('--output-background', '#1F2937');
+        root.style.setProperty('--conversion-container-bg', '#273549');
+        root.style.setProperty('--conversion-headline', '#CCC1FF');
+        root.style.setProperty('--output-calculation', '#fff');
+    }
+    darkMode = !darkMode; // Toggle the dark mode
+});
+
+

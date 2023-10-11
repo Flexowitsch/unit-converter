@@ -24,6 +24,7 @@
     --color-btn-border: #6943FF;
     --color-btn-text: #6943FF;
     --color-btn-background-hover: rgba(94, 53, 255, 0.22);
+    --output-calculation: #353535;
 }
 
 
@@ -44,7 +45,7 @@ body {
 
 .container {
     width: 700px;
-    background-color: var(--output-background);
+
     border-radius: 0.75rem;
 }
 
@@ -116,10 +117,15 @@ input {
 
 #outputContainer {
     padding: 2.25rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
     display: none;
+    border-radius: 0 0 0.75rem 0.75rem;
+    background-color: var(--output-background);
+    display: none;
+    /* Initially hidden */
+    opacity: 0;
+    /* Initially fully transparent */
+    transition: opacity 0.5s;
+    /* Smooth transition for opacity property */
 }
 
 .conversion-container {
@@ -127,6 +133,11 @@ input {
     padding: 1rem;
     text-align: center;
     border-radius: 0.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.conversion-container:last-of-type {
+    margin-bottom: 0;
 }
 
 h2 {
@@ -144,7 +155,7 @@ h2 {
 
 p.calculation-output {
     margin: 0;
-    color: #353535;
+    color: var(--output-calculation);
     text-align: center;
 
     /* text-sm/leading-5/font-normal */
